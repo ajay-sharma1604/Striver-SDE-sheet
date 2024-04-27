@@ -252,5 +252,69 @@ public class PascalsTriangle {
 }
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question3) Next permutation
+leetcode-31
+https://leetcode.com/problems/next-permutation/
+//T.C -O(n)
+//S.C -O(1)
+
+public class NextPermutation {
+
+    public static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            // Swap elements at start and end indices
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+
+            // Move towards the middle of the array
+            start++;
+            end--;
+        }
+    }
+
+    public static void nextPermutation(int arr[]) {
+        // find break-point
+        int bp = -1;
+        for (int i = arr.length - 1; i > 0; i--) {
+            if (arr[i - 1] < arr[i]) {
+                bp = i - 1;
+                break;
+            }
+        }
+        if (bp == -1) {
+            reverse(arr, 0, arr.length - 1);
+        }
+
+        // When bp exists- find smallest, swap bp with smallest
+        int smallest = Integer.MAX_VALUE;
+        int idx = 0;
+        for (int j = bp + 1; j < arr.length - 1; j++) {
+            if (arr[j] < smallest && arr[j] > arr[bp]) {
+                smallest = arr[j];
+                idx = j;
+            }
+        }
+        // swap
+        int temp = arr[bp];
+        arr[bp] = arr[idx];
+        arr[idx] = temp;
+
+        // reverse -bp+1 to last idx
+        reverse(arr, bp + 1, arr.length - 1);
+
+        //print 
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        int nums[] = { 2, 1, 5, 4, 3, 0, 0 };
+        nextPermutation(nums);
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
