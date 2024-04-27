@@ -1,49 +1,120 @@
 (Question 1) Set Matrix Zeroes
 Leetcode 73- https://leetcode.com/problems/set-matrix-zeroes/
 
--> Brute Force Approach
+//Brute Force Approach- O(m * n * (m + n)), SC- O(1)
+/*
+public class setMatrixZeroes{
 
-public class Basics {
+public static void markRow(int matrix[][], int i) {
+    for (int j = 0; j < matrix[0].length; j++) {
+        if (matrix[i][j] != 0) {
+            matrix[i][j] = -1;
+        }
+    }
+}
 
-    public static void markRow(int matrix[][], int i) {
+public static void markCol(int matrix[][], int j) {
+    for (int i = 0; i < matrix.length; i++) {
+        if (matrix[i][j] != 0) {
+            matrix[i][j] = -1;
+        }
+    }
+}
+
+public static void finalMatrix(int matrix[][]) {
+    for (int i = 0; i < matrix.length; i++) {
         for (int j = 0; j < matrix[0].length; j++) {
-            if (matrix[i][j] != 0) {
-                matrix[i][j] = -1;
+            if (matrix[i][j] == -1) {
+                matrix[i][j] = 0;
             }
         }
     }
+}
 
-    public static void markCol(int matrix[][], int j) {
-        for (int i = 0; i < matrix.length; i++) {
-            if (matrix[i][j] != 0) {
-                matrix[i][j] = -1;
+public static void setZero(int matrix[][]) {
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j] == 0) {
+                markRow(matrix, i);
+                markCol(matrix, j);
             }
         }
     }
+    finalMatrix(matrix);
+}
 
-    public static void finalMatrix(int matrix[][]) {
+public static void printMatrix(int matrix[][]) {
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[0].length; j++) {
+            System.out.print(matrix[i][j] + " ");
+        }
+        System.out.println();
+    }
+    System.out.println();
+}
+
+public static void main(String[] args) {
+    int matrix[][] = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+    printMatrix(matrix);
+    setZero(matrix);
+    printMatrix(matrix);
+}
+}
+*/
+
+//-------------------------------------------------------------------------------------------------------------
+
+//Better Approach
+//T.c - O(n*m)
+//S.c =O(n+m)
+
+/*public class setMatrixZeroes {
+
+    public static void print(int matrix[][]) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] == -1) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        int matrix[][] = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+        print(matrix);
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int row[] = new int[n];
+        int col[] = new int[m];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = 1;
+                    col[j] = 1;
+                }
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (row[i] == 1 || col[j] == 1) {
                     matrix[i][j] = 0;
                 }
             }
         }
+        print(matrix);
     }
+}
+*/
 
-    public static void setZero(int matrix[][]) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] == 0) {
-                    markRow(matrix, i);
-                    markCol(matrix, j);
-                }
-            }
-        }
-        finalMatrix(matrix);
-    }
+// -------------------------------------------------------------------------------------------------------------
 
-    public static void printMatrix(int matrix[][]) {
+//Optimal Approach
+//T.c -O(n*m)
+//S.c -O(1)
+/* 
+public class setMatrixZeroes {
+
+    public static void print(int matrix[][]) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + " ");
@@ -54,11 +125,51 @@ public class Basics {
     }
 
     public static void main(String[] args) {
-        int matrix[][] = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
-        printMatrix(matrix);
-        setZero(matrix);
-        printMatrix(matrix);
+        int matrix[][] = { { 1, 1, 1, 1 }, { 1, 0, 1, 1 }, { 1, 1, 0, 1 }, { 0, 1, 1, 1
+        } };
+        int col0 = matrix[0][0];
+
+        // initalize value in 1st row and 1st col (Assumed array)
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;// row
+                    if (j != 0) {
+                        matrix[0][j] = 0;
+                    } else {
+                        col0 = 0;
+                    }
+                }
+            }
+        }
+
+        // checking after 1st row and 1st col
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[0].length; j++) {
+                if (matrix[i][j] != 0) {
+                    if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+        }
+
+        if (matrix[0][0] == 0) {
+            for (int j = 1; j < matrix[0].length; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        if (col0 != 1) {
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+
+        print(matrix);
     }
 }
+*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--> 
+
