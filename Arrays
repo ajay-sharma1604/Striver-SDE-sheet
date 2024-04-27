@@ -171,7 +171,14 @@ public class setMatrixZeroes {
 }
 */
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                Pascal's Triangle
 
+Leetcode-118
+https://leetcode.com/problems/pascals-triangle/
+
+//Naive approadh
+T.c- O(n^3)
+S.c- O(1)
 import java.util.ArrayList;
 
 public class PascalsTriangle {
@@ -204,5 +211,46 @@ public class PascalsTriangle {
         System.out.println(List);
         }
     }
+
+
+//Optimal solution
+T.c- O(n^2)
+S.c -O(1)
+
+import java.util.ArrayList;
+
+public class PascalsTriangle {
+
+    public static ArrayList<Integer> cal(int n) {
+        long res = 1;
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(1);
+
+        // 0 based indexing
+        for (int col = 1; col < n; col++) {
+            res = res * (n - col);
+            res = res / (col);
+            ans.add((int)res);
+        }
+        return ans;
+    }
+
+    public static ArrayList<ArrayList<Integer>> pascalTriangle(int n) {
+
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        for (int row = 1; row <= n; row++) {
+                list.add(cal(row));
+            }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        ArrayList<ArrayList<Integer>> List = pascalTriangle(n);
+        System.out.println(List);
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
