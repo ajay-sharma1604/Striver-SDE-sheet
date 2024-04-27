@@ -291,7 +291,7 @@ public class NextPermutation {
         int smallest = Integer.MAX_VALUE;
         int idx = -1;
         for (int j = bp + 1; j <= arr.length - 1; j++) {
-            if (arr[j] < smallest && arr[j] > arr[bp]) {
+            if (arr[j] <= smallest && arr[j] > arr[bp]) {
                 smallest = arr[j];
                 idx = j;
             }
