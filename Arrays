@@ -160,7 +160,7 @@ public class setMatrixZeroes {
             }
         }
 
-        if (col0 != 1) {
+        if (col0 == 0) {
             for (int i = 0; i < matrix.length; i++) {
                 matrix[i][0] = 0;
             }
