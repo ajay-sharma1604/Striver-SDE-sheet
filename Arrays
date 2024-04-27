@@ -284,12 +284,13 @@ public class NextPermutation {
         }
         if (bp == -1) {
             reverse(arr, 0, arr.length - 1);
+            return;
         }
 
         // When bp exists- find smallest, swap bp with smallest
         int smallest = Integer.MAX_VALUE;
-        int idx = 0;
-        for (int j = bp + 1; j < arr.length - 1; j++) {
+        int idx = -1;
+        for (int j = bp + 1; j <= arr.length - 1; j++) {
             if (arr[j] < smallest && arr[j] > arr[bp]) {
                 smallest = arr[j];
                 idx = j;
@@ -314,6 +315,7 @@ public class NextPermutation {
         nextPermutation(nums);
     }
 }
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
