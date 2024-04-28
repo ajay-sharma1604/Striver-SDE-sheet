@@ -348,6 +348,73 @@ public class kadanesAlgorithm {
 }
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Quetsion5 ) Sort Colors
+
+leetcode- 75
+https://leetcode.com/problems/sort-colors/
+
+->Brute force
+T.c- O(n^2
+S.c- O(1)
+    public void sortColors(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1; j<nums.length;j++){
+                if(nums[i] > nums[j]){
+                    int temp = nums[i];
+                    nums[i]= nums[j];
+                    nums[j]= temp;
+                }
+            }
+        }
+    }
 
 
+
+->Optimal Solution
+T.c- O(n)
+S.c- O(1)
+public class SortColors {
+
+    public static void sortColor(int nums[]) {
+        int low = 0;
+        int mid = 0;
+        int high = nums.length - 1;
+
+        // mid = 0 ,swap low and mid, low++ mid++
+        // mid = 1, mid++
+        // mid = 2, swap high and mid, high--
+
+        while (mid <= high) {
+            // case1
+            if (nums[mid] == 0) { // swap low and mid
+                int temp = nums[low];
+                nums[low] = nums[mid];
+                nums[mid] = temp;
+                low++;
+                mid++;
+            }
+
+            // case2
+            else if (nums[mid] == 1) {// mid++
+                mid++;
+            }
+
+            // case3
+            else {
+                int temp = nums[high];
+                nums[high] = nums[mid];
+                nums[mid] = temp;
+                high--;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = { 2, 1, 0, 0, 1, 2 };
+        sortColor(arr);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
 
