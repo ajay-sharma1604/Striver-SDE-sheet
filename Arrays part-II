@@ -155,7 +155,8 @@ public class MergeSortedArrays {
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 Quetsion 4 Find Duplicate Number
-leetcode- 
+leetcode-287
+https://leetcode.com/problems/find-the-duplicate-number/description/
 
  //T.c=  O(nlogn), S.c= O(1)
 import java.util.Arrays;
@@ -189,6 +190,32 @@ public class Findduplicate {
             };
         }
         return -1;
+    }
+    public static void main(String[] args) {
+        int nums[] = { 3, 3, 3, 3, 3 };
+        System.out.println(findDuplicate(nums));
+    }
+}
+
+
+ //T.c- O(n), S.c- O(1)
+import java.util.HashSet;
+public class Findduplicate {
+    public static int findDuplicate(int[] nums) {
+        //linked-list cycle method + Tortoise Method
+        int slow = nums[0];
+        int fast = nums[0];
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while (slow != fast);
+
+        fast = nums[0];
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
     public static void main(String[] args) {
         int nums[] = { 3, 3, 3, 3, 3 };
