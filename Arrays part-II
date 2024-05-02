@@ -154,5 +154,46 @@ public class MergeSortedArrays {
 }
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+Quetsion 4 Find Duplicate Number
+leetcode- 
+
+ //T.c=  O(nlogn), S.c= O(1)
+import java.util.Arrays;
+public class Findduplicate {
+    public static int findDuplicate(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        for (int i = 0; i <= n-1; i++) {
+        if (nums[i] == nums[i+1]) {
+        return nums[i];
+        }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int nums[] = { 3, 3, 3, 3, 3 };
+        System.out.println(findDuplicate(nums));
+    }
+}
+
+ //t.c- O(n), S.c- O(n)
+import java.util.HashSet;
+public class Findduplicate {
+    public static int findDuplicate(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if(!set.add(num)){
+                return num;
+            };
+        }
+        return -1;
+    }
+    public static void main(String[] args) {
+        int nums[] = { 3, 3, 3, 3, 3 };
+        System.out.println(findDuplicate(nums));
+    }
+}
 
 
