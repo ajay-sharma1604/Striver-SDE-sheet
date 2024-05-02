@@ -223,4 +223,59 @@ public class Findduplicate {
     }
 }
 
+-----------------------------------------------------------------------------------------------------------------
+Question 5 Repeated and Missing number
 
+//T.c- O(n), S.c- O(n)
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class RepeatedMissing {
+
+    public static ArrayList<Integer> repeatedMissing(ArrayList<Integer> list) {
+
+        // repeated
+        HashSet<Integer> set = new HashSet<>();
+        int repeated = -1;
+        for (int num : list) {
+            if (!set.add(num)) {
+                repeated = num;
+                break;
+            }
+        }
+
+    // missing
+    int n = list.size();
+    long expectedSum = (long)n * (n + 1) / 2;
+    long actualSum = 0;
+    for (int num : list) {
+        if(num!=repeated){
+            actualSum += num;
+        }
+    }
+    actualSum =actualSum+repeated;
+
+    // Fix for overflow: subtract repeated number only once
+    long missing = expectedSum - actualSum;
+
+        // print
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(repeated);
+        ans.add((int)missing);
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(3);
+        list.add(1);
+        list.add(2);
+        list.add(5);
+        list.add(3);
+
+        ArrayList<Integer> result = repeatedMissing(list);
+        System.out.println(result);
+    }
+}
