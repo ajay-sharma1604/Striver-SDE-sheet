@@ -279,3 +279,61 @@ public class RepeatedMissing {
         System.out.println(result);
     }
 }
+
+
+//T.c- O(n), S.c- O(1)
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class RepeatedMissing {
+
+    public static ArrayList<Integer> repeatedMissing(ArrayList<Integer> list) {
+        long n = list.size();
+        // find sn and s2n-ensure long to prevent overflow
+        long sn = (n * (n + 1)) / 2;
+        long s2n = (n * (n + 1) * (2 * n + 1)) / 6;
+
+        // find s and s2
+        long s = 0, s2 = 0;
+        for (int i = 0; i < n; i++) {
+            s += list.get(i);
+            s2 += (long)list.get(i) *(long) list.get(i);
+        }
+
+        // s-sn =x-y
+        long val1 = s -sn;
+
+        // s2-s2n = x^2- y^2
+        long val2 = s2 - s2n;
+
+        // find x+y =(x^2-y^2)/(x-y)
+        val2 = val2 / val1;
+
+        // find x and y , val1+ val2/2
+        long x = (val1 + val2) / 2;
+        long y = x - val1; //val2-x
+
+        // print
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add((int)x);
+        ans.add((int) y);
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(3);
+        list.add(1);
+        list.add(2);
+        list.add(5);
+        list.add(3);
+
+        ArrayList<Integer> result = repeatedMissing(list);
+        System.out.println(result);
+    }
+}
+-----------------------------------------------------------------------------------------------------------------
+
+
