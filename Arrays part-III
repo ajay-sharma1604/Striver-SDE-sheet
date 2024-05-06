@@ -7,35 +7,7 @@ https://leetcode.com/problems/search-a-2d-matrix/description/?submissionId=12508
 
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        //single element
-        if (matrix.length == 1 && matrix[0].length==1) {
-             if(matrix[0][0] == target){
-                return true;
-        }
-    }
-
-        //single row
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        if (rows == 1) {
-            for (int i = 0; i < cols; i++) {
-                if (matrix[0][i] == target) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-         // Single column
-        if (matrix[0].length == 1) {
-            for (int[] row : matrix) {
-                if (row[0] == target) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        //finding required row
+    
        int requiredRow = -1;
         for (int row = 0; row < matrix.length; row++) {
             if (matrix[row][matrix[row].length - 1] >= target) {
