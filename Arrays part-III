@@ -35,7 +35,7 @@ class Solution {
             }
             return false;
         }
-
+        //finding required row
        int requiredRow = -1;
         for (int row = 0; row < matrix.length; row++) {
             if (matrix[row][matrix[row].length - 1] >= target) {
@@ -49,7 +49,7 @@ class Solution {
             return false; 
         }
 
-     
+        //searching in required row
         for(int i=0; i<matrix[requiredRow].length;i++){
             if(matrix[requiredRow][i]==target){
                 return true;
