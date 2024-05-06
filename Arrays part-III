@@ -2,7 +2,7 @@ Question1
 
 74 Search a 2D Matrix
 https://leetcode.com/problems/search-a-2d-matrix/description/?submissionId=1250899578
-//tc =0(m) or (n)
+//tc =0(n)
 //sc- 0(1)
 
 class Solution {
