@@ -96,4 +96,67 @@ class Solution {
 }
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 3)
+128 Longest Consecutive Sequence
+https://leetcode.com/problems/longest-consecutive-sequence/
 
+
+//t.c- O(nlogn)
+//s.c-O(1)
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int maxCount =Integer.MIN_VALUE;
+        Arrays.sort(nums);
+        int x = 0;
+        int count =0;
+        if(nums.length == 0){
+            return 0;
+        }
+        for(int k=0;k<nums.length-1;k++){
+            if(nums[k] == nums[k+1]){
+                continue;
+            }
+           if(nums[k]+1==nums[k+1] ){
+            count++;
+            x = count;//for last
+            continue;
+           }
+             maxCount= Math.max(x,maxCount);
+             count=0;
+        }
+        int val = Math.max(maxCount,x);
+        return val +1;
+    }
+}  
+
+
+or
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int maxCount =Integer.MIN_VALUE;
+        Arrays.sort(nums);
+        int x = 0;
+        int count =0;
+        if(nums.length == 0){
+            return 0;
+        }
+        for(int k=1;k<nums.length;k++){
+            if(nums[k] == nums[k-1]){
+                continue;
+            }
+           if(nums[k]-1==nums[k-1] ){
+            count++;
+            x = count;//for last
+            continue;
+           }
+             maxCount= Math.max(x,maxCount);
+             count=0;
+        }
+        int val = Math.max(maxCount,x);
+        return val +1;
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
