@@ -192,3 +192,62 @@ class Solution {
 }
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question 4) 
+Largest Subarray with K sum
+
+//time limit exceeded
+package Arrays4;
+public class LargestSubarray {
+
+    public static int maxLen(int arr[], int N){
+        int maxCount =0;
+        for(int i=0;i<arr.length;i++){
+            int sum =0;
+            int count=0;
+            for(int j=i;j<arr.length;j++){
+                sum=sum+arr[j];
+                count++;
+                if(sum==0){
+                    maxCount= Math.max(maxCount,count);
+                }
+            }
+        }
+        return maxCount;
+    }
+    public static void main(String[] args) {
+        int arr[]= {15,-2,2,-8,1,7,10,23};
+        int N= arr.length;
+        System.out.println(maxLen(arr,N));
+    }
+}
+
+//optimised approach
+//t.c-O(n)
+//s.c-O(n)
+
+class GfG
+{
+    int maxLen(int arr[], int n)
+    { HashMap<Integer, Integer> sumMap = new HashMap<>();
+        
+        int maxLen = 0;
+        int currSum = 0;
+        
+        for (int i = 0; i < n; i++) {
+            currSum += arr[i];
+            if (currSum == 0) {
+                maxLen = i + 1;
+            }
+            
+            if (sumMap.containsKey(currSum)) {
+                maxLen = Math.max(maxLen, i - sumMap.get(currSum));
+            } else {
+                sumMap.put(currSum, i);
+            }
+        }
+        
+        return maxLen;
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
