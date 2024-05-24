@@ -75,3 +75,45 @@ class Solution {
     }
   
 }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+question 3) Merge Two Sorted Lists
+
+//brute force
+class Solution {
+    public static ListNode convertarrtoll(ArrayList<Integer>arr){
+        ListNode dummy =new ListNode(-1);
+        ListNode temp =dummy;
+
+        for(int i=0;i<arr.size();i++){
+            temp.next = new ListNode(arr.get(i));
+            temp=temp.next;
+        }
+        return dummy.next;
+    }
+
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ArrayList<Integer> arr =new ArrayList<>();
+        ListNode temp1 =list1;
+        ListNode temp2 =list2;
+
+        //storing both lists in arraylist
+        while(temp1!=null){
+            arr.add(temp1.val);
+            temp1 =temp1.next;
+        }
+        while(temp2!=null){
+            arr.add(temp2.val);
+            temp2 =temp2.next;
+        }
+
+        //sort arraylist
+        Collections.sort(arr);
+
+        ListNode head = convertarrtoll(arr);
+
+         return head;
+    }
+}
+
+------------------------Optimal
+
