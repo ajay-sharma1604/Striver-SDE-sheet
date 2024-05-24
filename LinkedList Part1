@@ -21,3 +21,45 @@ class Solution {
     }
 }
 -----------------------------------------------------------------------------------------------------------------
+Question 2) Find middle of Linked List
+https://leetcode.com/problems/middle-of-the-linked-list/
+
+-------------------------Brute
+//t.c- O(n+n/2)
+//s.c-O(1)
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+
+        // //base case
+        // if(head==null || head.next==null){
+        //     return head;
+        // }
+        //step1-counting nodes
+        ListNode temp =head; int count=0;
+        while(temp!=null){
+            count+=1;
+            temp=temp.next;
+        }
+
+        //step2-calculate mid value i
+        int mid =(count/2)+1;
+    
+        //step3- reaching desired mid node
+        temp=head;
+        while(temp!=null){
+            mid=mid-1;
+            if(mid==0){
+                break;
+            }
+            temp=temp.next;
+        }
+         return temp;
+    }
+}
+
+-------------------------Optimal
+
+//t.c- O(n/2)
+//s.c-O(1)
+
