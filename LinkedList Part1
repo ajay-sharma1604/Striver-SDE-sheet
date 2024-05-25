@@ -199,3 +199,38 @@ class Solution {
     }
 }
 
+
+//optimal solution
+
+//t.c- O(n) -fastpointer will traverse the entire ll, n=length of ll
+//s.c- O(1)
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode fast =head;
+        for(int i=0;i<n;i++){
+            fast=fast.next;
+        }
+
+        //special case
+        if(fast == null){ //from end we need to delete head
+            return head.next;
+        }
+
+        ListNode slow =head;
+        while(fast.next!=null){
+            slow= slow.next;
+            fast=fast.next;
+        }
+
+        //delete node next to slow(prev) node   
+        ListNode tarNode = slow.next;
+        slow.next =slow.next.next;
+        tarNode =null;
+        return head;
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question 5)
