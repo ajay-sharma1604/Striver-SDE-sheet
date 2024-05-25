@@ -145,3 +145,57 @@ class Solution {
         return dummy.next;
     }
 }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+question 4)
+
+Remove Nth Node From End of List
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+//Brute Force
+//t.c- O(L) + O(L-N)
+//s.c- O(1)
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int count = 0;
+        ListNode temp = head;
+
+        //base case- ll is empty
+        if(head==null){
+            return  null;
+        }
+         
+        //calculate count
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+
+        //special case
+        if(count==n){   //i.e remove head
+            ListNode newHead =head.next;
+            head =null;
+            return newHead;
+        }
+
+        //find previous of targeted node
+        int result = count-n;
+        temp = head;
+
+        //reaching previous node of tar node
+        while(temp!=null){
+            result--;
+            if(result==0){
+                break;
+            }
+            temp =temp.next;    //temp is the prev node
+        }
+
+        ListNode tarNode = temp.next;
+        temp.next =temp.next.next;
+        tarNode =null;
+        return head;
+    }
+}
+
